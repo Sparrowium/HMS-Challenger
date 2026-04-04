@@ -1,0 +1,13 @@
+title: "My Lab"
+theme: dark
+
+docker:
+  socket: /var/run/docker.sock
+
+widgets:
+  - resources:
+      cpu: true
+      memory: true
+      disk: /
+  - glances:
+      url: "{{HOMEPAGE_VAR_GLANCES_API}}"

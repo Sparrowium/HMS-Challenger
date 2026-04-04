@@ -1,0 +1,10 @@
+# Local environment variables (secrets)
+.env
+
+# Backup files
+*.bak
+*.swp
+
+
+# Docker volumes (if any)
+/homepage/config/logs

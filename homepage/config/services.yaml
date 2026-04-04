@@ -1,0 +1,13 @@
+- My Services:
+    - Uptime Kuma:
+        icon: uptime-kuma.png
+        href: "{{HOMEPAGE_VAR_UPTIME_URL}}"
+        description: Status Monitoring
+    - Glances:
+        icon: glances.png
+        href: "{{HOMEPAGE_VAR_GLANCES_URL}}"
+        description: System Stats
+    - Grafana:
+        icon: grafana.png
+        href: "{{HOMEPAGE_VAR_GRAFANA_URL}}"
+        description: Metrics

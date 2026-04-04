@@ -1,0 +1,44 @@
+services:
+  homepage:
+    image: ghcr.io/gethomepage/homepage:latest
+    container_name: homepage
+    restart: unless-stopped
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
+    ports:
+      - "8921:3000"                   # direct access on port 8921
+    volumes:
+      - ./homepage/config:/app/config
+      - ./homepage/images:/app/public/images
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    # No networks section – uses default bridge
+
+  glances:
+    image: nicolargo/glances:latest
+    container_name: glances
+    restart: unless-stopped
+    ports:
+      - "61208:61208"                 # optional, if you want direct Glances UI
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /proc:/proc:ro
+      - /sys:/sys:ro
+    environment:
+      - GLANCES_OPT=-w
+    command: ["glances", "-w", "--bind", "0.0.0.0", "-p", "61208"]
+    # No networks needed
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    restart: unless-stopped
+    ports:
+      - "3001:3001"                   # direct Uptime Kuma UI
+    volumes:
+      - uptime-kuma-data:/app/data
+    # No networks needed
+
+volumes:
+  uptime-kuma-data:
