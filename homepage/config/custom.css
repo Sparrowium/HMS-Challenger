@@ -1,0 +1,316 @@
+/* ============================================================
+   Nord Theme (Polar Night + Snow Storm) 
+   + User's custom layout (rounded corners, tinting, tabs, etc.)
+   ============================================================ */
+
+/* Nord palette */
+:root {
+  --nord0: #2E3440;
+  --nord1: #3B4252;
+  --nord2: #434C5E;
+  --nord3: #4C566A;
+  --nord4: #D8DEE9;
+  --nord5: #E5E9F0;
+  --nord6: #ECEFF4;
+  --nord7: #8FBCBB;
+  --nord8: #88C0D0;
+  --nord9: #81A1C1;
+  --nord10: #5E81AC;
+}
+
+/* --- GLOBAL SCROLLBAR HIDING (user's rule) --- */
+::-webkit-scrollbar {
+    display: none;
+}
+body {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* --- MASTER ROUNDED CORNERS (user's rule) --- */
+.service-card, 
+.bookmark-card,
+.group-header,
+div[id$="-card"],
+div[id$="-card"] > div,
+div[class*="rounded-lg"] {
+    border-radius: 25px !important;
+    overflow: hidden !important;
+    isolation: isolate !important;
+}
+
+/* --- CARD TINTING SETUP (user's IDs – keep as is) --- */
+#sonarr-card, #radarr-card, #lidarr-card, #prowlarr-card,
+#qbit-card, #jellyfin-card, #jellystat-card, #jellyseerr-card,
+#notifications-card, #upcoming-card,
+#beszel-card, #uptime-card,
+#proxmox-card, #komodo-card,
+#pihole1-card, #pihole2-card, #pihole3-card, #immich-card, 
+#homeassistant-card, #intel-card, #pangolin-card, #crowdsec-card,
+#traefik-card {
+    position: relative !important;
+    background-color: transparent !important;
+}
+
+#sonarr-card::before, #radarr-card::before,
+#lidarr-card::before, #prowlarr-card::before,
+#qbit-card::before, #jellyfin-card::before, 
+#jellystat-card::before, #jellyseerr-card::before,
+#notifications-card::before, #upcoming-card::before,
+#beszel-card::before, #uptime-card::before,
+#proxmox-card::before, #komodo-card::before,
+#pihole1-card::before, #pihole2-card::before, 
+#pihole3-card::before, #immich-card::before, 
+#homeassistant-card::before, 
+#intel-card::before, #pangolin-card::before,
+#crowdsec-card::before, #traefik-card::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    right: 2px;
+    bottom: 6px;
+    z-index: 0;
+    border-radius: 23px !important;
+    opacity: 0.35;
+}
+
+/* --- SERVICE COLOR ASSIGNMENTS (user's original colours – keep as is) --- */
+#sonarr-card::before                                                      { background-color: #25C1FF !important; }
+#radarr-card::before                                                      { background-color: #FFC230 !important; }
+#lidarr-card::before                                                      { background-color: #00C655 !important; }
+#prowlarr-card::before                                                    { background-color: #ff3d00 !important; }
+#jellyfin-card::before, #jellystat-card::before, #jellyseerr-card::before { background-color: #AA5CC3 !important; }
+#qbit-card::before                                                        { background-color: #39BA5D !important; }
+#notifications-card::before                                               { background-color: #4ade80 !important; }
+#upcoming-card::before                                                    { background-color: #22d3ee !important; }
+#beszel-card::before                                                      { background-color: #3eadff !important; }
+#uptime-card::before                                                      { background-color: #61efad !important; }
+#proxmox-card::before                                                     { background-color: #ff7b00 !important; }
+#komodo-card::before                                                      { background-color: #33cc33 !important; }
+#pihole1-card::before, #pihole2-card::before                              { background-color: #96060c !important; }
+#immich-card::before                                                      { background-color: #ea2222 !important; }
+#homeassistant-card::before                                               { background-color: #3fb1db !important; }
+#intel-card::before                                                       { background-color: #3eadff !important; }
+#pangolin-card::before                                                    { background-color: #ff7700 !important; }
+#crowdsec-card::before                                                    { background-color: #2a2978 !important; }
+#traefik-card::before                                                     { background-color: #3fb1db !important; }
+
+/* --- STATUS & PING BADGE POSITIONING (user's rule) --- */
+.service-card > div {
+    position: relative;
+    z-index: 1;
+}
+
+span[class*="status-"], 
+div[class*="status-"] {
+    position: absolute !important;
+    top: 10px !important;
+    right: 12px !important;
+    z-index: 10 !important;
+    border-radius: 8px !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    padding: 2px 6px !important;
+}
+
+.service-tags {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 4px !important;
+    top: 10px !important;
+    right: 12px !important;
+    position: absolute !important;
+    z-index: 20 !important;
+}
+
+.service-ping .ping-status {
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 8px !important;
+    padding: 2px 6px !important;
+    height: auto !important;
+    width: auto !important;
+    background-image: none !important;
+}
+
+.service-ping .ping-status div {
+    font-size: 9px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    opacity: 1 !important;
+    line-height: 1.2 !important;
+}
+
+.service-ping .ping-status div[class*="text-emerald"],
+.service-ping .ping-status div[class*="text-rose"],
+.service-ping .ping-status div[class*="text-red"] {
+    filter: brightness(1.4) !important; 
+}
+
+/* --- TAB NAVIGATION (user's centering + Nord colours) --- */
+#tabs ul {
+    width: fit-content !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    display: flex !important;            
+    flex-direction: row !important;      
+    flex-wrap: wrap !important;
+    justify-content: center !important;  
+    gap: 4px !important;
+    border-radius: 50px !important;
+    padding: 4px !important;
+    background-color: rgba(59, 66, 82, 0.5) !important; /* nord1 with opacity */
+}
+
+#tabs ul li {
+    width: auto !important;
+    flex: 0 0 auto !important;
+}
+
+#tabs ul li button {
+    width: auto !important;
+    border-radius: 50px !important;
+    padding: 6px 20px !important;
+    min-height: unset !important;
+    color: var(--nord4) !important; 
+    background-color: transparent !important;
+}
+
+#tabs ul li button[aria-selected="true"] {
+    color: var(--nord8) !important;
+    background-color: rgba(67, 76, 94, 0.5) !important; /* nord2 with opacity */
+    font-weight: bold !important;
+}
+
+@media (max-width: 768px) {
+    #tabs ul li button {
+        padding: 5px 10px !important; 
+        font-size: 13px !important;   
+    }
+    #tabs ul {
+        max-width: 100% !important;
+    }
+}
+
+/* --- BOOKMARK STYLING (user's rules + Nord colors) --- */
+li.bookmark a {
+    border-radius: 25px !important;
+    background-color: rgba(59, 66, 82, 0.5) !important; /* nord1 + opacity */
+    border: 1px solid rgba(76, 86, 106, 0.5) !important; /* nord3 */
+    box-shadow: none !important;
+    overflow: hidden !important;
+    margin-bottom: 8px !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+li.bookmark .bookmark-icon {
+    border-radius: 0 !important;
+    background-color: rgba(67, 76, 94, 0.3) !important; /* nord2 */
+    border-right: 1px solid rgba(76, 86, 106, 0.3) !important;
+}
+
+.bookmark-name {
+    color: var(--nord5) !important;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+}
+
+.bookmark-description {
+    color: var(--nord4) !important;
+    font-size: 0.7rem !important;
+}
+
+li.bookmark a:hover {
+    background-color: rgba(67, 76, 94, 0.7) !important;
+    transform: translateY(-2px);
+    border-color: var(--nord8) !important;
+}
+
+li.bookmark a:hover .bookmark-name {
+    color: var(--nord8) !important;
+}
+
+/* --- SYSTEM MONITOR (user's gradient) --- */
+.information-widget-resource div[style*="width"] {
+    background: linear-gradient(90deg, #4ade80 0%, #2dd4bf 40%, #3b82f6 75%, #b80fde 100%) !important;
+    opacity: 0.40 !important;
+    border-radius: 10px !important;
+}
+
+.information-widget-resource:nth-of-type(1) svg { color: #4ade80 !important; } 
+.information-widget-resource:nth-of-type(2) svg { color: #22d3ee !important; }
+.information-widget-resource:nth-of-type(3) svg { color: #ef4444 !important; }
+.information-widget-resource:nth-of-type(4) svg { color: #3b82f6 !important; }
+
+/* --- GENERAL TYPOGRAPHY (Nord colors) --- */
+.service-group-name, .bookmark-group-name {
+    color: var(--nord6) !important;
+    font-weight: 700 !important;
+}
+
+.service-name, .service-description {
+    color: var(--nord4) !important; 
+}
+
+/* --- WIDGET CONTAINERS (user's glassmorphism + Nord) --- */
+@media (min-width: 768px) {
+    .widget-container,
+    .information-widget-logo,
+    [class*="information-widget-glances"] {
+        background-color: rgba(59, 66, 82, 0.3) !important;
+        border-radius: 50px !important;
+        border: 1px solid rgba(76, 86, 106, 0.3) !important;
+        height: 42px !important;
+        display: flex !important;
+        align-items: center !important;
+        padding: 0 16px !important;
+        margin-top: 10px !important;
+        box-shadow: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .widget-container,
+    .information-widget-logo,
+    [class*="information-widget-glances"] {
+        background-color: rgba(59, 66, 82, 0.3) !important;
+        border-radius: 25px !important;
+        border: 1px solid rgba(76, 86, 106, 0.3) !important;
+        height: auto !important;
+        min-height: 40px !important;
+        padding: 8px 12px !important;
+        margin: 5px 0 !important;
+        width: 100% !important;
+    }
+
+    .information-widget-inner, 
+    [class*="information-widget-glances"] > div {
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 8px !important;
+    }
+}
+
+.information-widget-logo img {
+    margin: 0 !important;
+    max-height: 24px !important;
+}
+
+.information-widget-resource,
+.widget-inner-text,
+.resource-icon {
+    display: flex !important;
+    align-items: center !important;
+    margin: 0 !important;
+}
+
+.information-widget-resource {
+    margin-right: 12px !important;
+}
+
+/* --- GLOBAL BACKGROUND (Nord Polar Night) --- */
+body, html, #__next, .dashboard {
+    background-color: var(--nord0) !important;
+    color: var(--nord5) !important;
+}

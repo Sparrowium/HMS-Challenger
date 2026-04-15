@@ -1,13 +1,94 @@
-- My Services:
-    - Uptime Kuma:
-        icon: uptime-kuma.png
-        href: "{{HOMEPAGE_VAR_UPTIME_URL}}"
-        description: Status Monitoring
+# ============================================================
+# 🦈 SHARK – Host machine (vertical/list style)
+# ============================================================
+- Nexus:
+    - Homepage Dashboard:
+        icon: homepage.png
+        href: "{{HOMEPAGE_VAR_HOMEPAGE_URL}}"
+        description: Main dashboard
+        container: homepage
+        statusStyle: dot
+    - Beszel Hub:
+        icon: beszel.png
+        href: "{{HOMEPAGE_VAR_BESZEL_HUB_URL}}"
+        description: System & container monitoring
+        container: beszel-hub
+        widget:
+          type: beszel
+          url: "{{HOMEPAGE_VAR_BESZEL_API}}"
+          version: 2
+          username: "{{HOMEPAGE_VAR_BESZEL_USER}}"
+          password: "{{HOMEPAGE_VAR_BESZEL_PASS}}"
+    - Beszel Agent:
+        icon: beszel.png
+        href: "{{HOMEPAGE_VAR_BESZEL_HUB_URL}}"
+        description: Data collector
+        container: beszel-agent
+
+- Network:
+    - nginx Proxy:
+        icon: nginx.png
+        description: Reverse proxy
+        container: nginx
+    - CoreDNS:
+        icon: coredns.png
+        description: DNS server
+        container: coredns
+    - Speedtest Tracker:
+        icon: speedtest-tracker.png
+        description: Internet speed history
+        container: speedtest-tracker
+        widget:
+          type: speedtest
+          url: "{{HOMEPAGE_VAR_SPEEDTEST_API}}"
+
+- Monitor:
     - Glances:
         icon: glances.png
         href: "{{HOMEPAGE_VAR_GLANCES_URL}}"
-        description: System Stats
+        description: Real‑time system stats
+        container: glances
+    - Uptime Kuma:
+        icon: uptime-kuma.png
+        href: "{{HOMEPAGE_VAR_UPTIME_URL}}"
+        description: Service uptime monitoring
+        container: uptime-kuma
+        widget:
+          type: uptimekuma
+          url: "{{HOMEPAGE_VAR_UPTIMEKUMA_API}}"
+          slug: general
     - Grafana:
         icon: grafana.png
         href: "{{HOMEPAGE_VAR_GRAFANA_URL}}"
-        description: Metrics
+        description: Metrics visualization
+        container: grafana
+
+# ============================================================
+# 🐺 WOLVES – Remote servers/services (horizontal/row style)
+# ============================================================
+- Media:
+    - Plex:
+        icon: plex.png
+        href: "{{HOMEPAGE_VAR_PLEX_URL}}"
+        description: Media server
+        container: plex
+        widget:
+          type: plex
+          url: "http://plex:32400"
+          key: "{{HOMEPAGE_VAR_PLEX_KEY}}"
+    - Jellyfin:
+        icon: jellyfin.png
+        href: "{{HOMEPAGE_VAR_JELLYFIN_URL}}"
+        description: Alternative media server
+        container: jellyfin
+        widget:
+          type: jellyfin
+          url: "http://jellyfin:8096"
+          key: "{{HOMEPAGE_VAR_JELLYFIN_KEY}}"
+
+- Remote Services:
+    - Proxmox Host:
+        icon: proxmox.png
+        href: "{{HOMEPAGE_VAR_PROXMOX_URL}}"
+        description: Virtualization host
+        siteMonitor: "{{HOMEPAGE_VAR_PROXMOX_URL}}"

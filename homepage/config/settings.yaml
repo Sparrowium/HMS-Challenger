@@ -1,13 +1,64 @@
-title: "My Lab"
+title: "Homelab Dashboard"
 theme: dark
+color: neutral                     # CSS will override everything
+favicon: /images/fav.ico
+background:                        # CSS will override background
+  blur: md
+  saturate: 40
+  brightness: 55
+  opacity: 85
+
+headerStyle: boxedWidgets
+iconStyle: theme
+disableCollapse: true
+maxGroupColumns: 4
 
 docker:
   socket: /var/run/docker.sock
+  exclude: "*"
+
+layout:
+  Nexus:
+    tab: "🦈 Shark"
+    style: list
+  Network:
+    tab: "🦈 Shark"
+    style: list
+  Monitor:
+    tab: "🦈 Shark"
+    style: list
+  Media:
+    tab: "🐺 Wolves"
+    style: row
+    columns: 4
+  Remote Services:
+    tab: "🐺 Wolves"
+    style: row
+    columns: 4
 
 widgets:
+  - logo:
+      icon: /images/logo.png
+  - datetime:
+      text_size: xl
+      format:
+        dateStyle: short
+        timeStyle: short
+        hour12: true
   - resources:
       cpu: true
       memory: true
       disk: /
   - glances:
-      url: "{{HOMEPAGE_VAR_GLANCES_API}}"
+      url: "http://glances:61208"
+      version: 4
+  - beszel:
+      url: "http://beszel-hub:8090"
+      version: 2
+      username: "{{HOMEPAGE_VAR_BESZEL_USER}}"
+      password: "{{HOMEPAGE_VAR_BESZEL_PASS}}"
+  - speedtest:
+      url: "http://speedtest-tracker:80"
+  - search:
+      provider: duckduckgo
+      target: _blank

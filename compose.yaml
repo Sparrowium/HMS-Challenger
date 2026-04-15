@@ -3,24 +3,31 @@ services:
     image: ghcr.io/gethomepage/homepage:latest
     container_name: homepage
     restart: unless-stopped
+    networks:
+      - proxy
+      - central
     environment:
       - PUID=1000
       - PGID=1000
       - HOMEPAGE_ALLOWED_HOSTS=${HOMEPAGE_ALLOWED_HOSTS}
     ports:
-      - "8921:3000"                   # direct access on port 8921
+      - "8921:3000"
     volumes:
       - ./homepage/config:/app/config
       - ./homepage/images:/app/public/images
       - /var/run/docker.sock:/var/run/docker.sock:ro
-    # No networks section – uses default bridge
+    env_file:
+      - .env
 
   glances:
     image: nicolargo/glances:latest
     container_name: glances
     restart: unless-stopped
+    networks:
+      - proxy
+      - central
     ports:
-      - "61208:61208"                 # optional, if you want direct Glances UI
+      - "61208:61208"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - /proc:/proc:ro
@@ -28,17 +35,76 @@ services:
     environment:
       - GLANCES_OPT=-w
     command: ["glances", "-w", "--bind", "0.0.0.0", "-p", "61208"]
-    # No networks needed
 
   uptime-kuma:
     image: louislam/uptime-kuma:latest
     container_name: uptime-kuma
     restart: unless-stopped
+    networks:
+      - proxy
+      - central
     ports:
-      - "3001:3001"                   # direct Uptime Kuma UI
+      - "3001:3001"
     volumes:
       - uptime-kuma-data:/app/data
-    # No networks needed
+    environment:
+      - UPTIME_KUMA_BASE_URL=/uptimekuma
+
+  # New: Beszel Hub
+  beszel-hub:
+    image: henrygd/beszel:latest
+    container_name: beszel
+    restart: unless-stopped
+    networks:
+      - proxy
+      - central
+    ports:
+      - "8090:8090"
+    volumes:
+      - ./beszel_data:/beszel_data
+
+  # New: Beszel Agent (needs host network mode)
+  beszel-agent:
+    image: henrygd/beszel-agent
+    container_name: beszel-agent
+    restart: unless-stopped
+    network_mode: host
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./beszel_agent_data:/var/lib/beszel-agent
+      # monitor other disks / partitions by mounting a folder in /extra-filesystems
+      # - /mnt/disk/.beszel:/extra-filesystems/sda1:ro
+    environment:
+      LISTEN: 45876
+      KEY: '${BESZEL_AGENT_KEY}'
+      TOKEN: ${BESZEL_AGENT_TOKEN}
+      HUB_URL: http://beszel.falcon
+
+  # New: Speedtest Tracker
+  speedtest-tracker:
+    image: lscr.io/linuxserver/speedtest-tracker:latest
+    container_name: speedtest-tracker
+    restart: unless-stopped
+    networks:
+      - proxy
+      - central
+    ports:
+      - "3003:80"
+    volumes:
+      - ./speedtest_data:/config
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - DB_CONNECTION=sqlite
 
 volumes:
   uptime-kuma-data:
+  beszel_data:
+  speedtest_data:
+
+networks:
+  proxy:
+    external: true
+  central:
+    driver: bridge
+

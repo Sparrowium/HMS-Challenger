@@ -1,6 +1,7 @@
 # Local environment variables (secrets)
 .env
-
+/beszel*
+/speed*
 # Backup files
 *.bak
 *.swp

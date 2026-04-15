@@ -1,18 +1,23 @@
----
-# For configuration options and examples, please see:
-# https://gethomepage.dev/configs/bookmarks
-
-- Developer:
-    - Github:
+- Shark:
+    - Cloudflare:
+        - abbr: CF
+          href: https://dash.cloudflare.com/
+          icon: si-cloudflare
+    - Tailscale:
+        - abbr: TS
+          href: https://login.tailscale.com/admin/machines
+          icon: si-tailscale
+    - GitHub:
         - abbr: GH
           href: https://github.com/
+          icon: si-github
 
-- Social:
-    - Reddit:
-        - abbr: RE
-          href: https://reddit.com/
-
-- Entertainment:
-    - YouTube:
-        - abbr: YT
-          href: https://youtube.com/
+- Wolves:
+    - Proxmox Web:
+        - abbr: PVE
+          href: https://proxmox.yourdomain.com:8006
+          icon: sh-proxmox
+    - Remote Dashboard:
+        - abbr: RMT
+          href: http://remote-server.falcon
+          icon: sh-server
