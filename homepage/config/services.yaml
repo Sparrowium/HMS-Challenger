@@ -34,13 +34,6 @@
         icon: coredns.png
         description: DNS server
         container: coredns
-    - Speedtest Tracker:
-        icon: speedtest-tracker.png
-        description: Internet speed history
-        container: speedtest-tracker
-        widget:
-          type: speedtest
-          url: "{{HOMEPAGE_VAR_SPEEDTEST_API}}"
 
 - Monitor:
     - Glances:

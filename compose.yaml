@@ -77,22 +77,6 @@ services:
       TOKEN: ${BESZEL_AGENT_TOKEN}
       HUB_URL: http://beszel.falcon
 
-  speedtest-tracker:
-    image: lscr.io/linuxserver/speedtest-tracker:latest
-    container_name: speedtest-tracker
-    restart: unless-stopped
-    networks:
-      - proxy
-      - central
-    ports:
-      - "3003:80"
-    volumes:
-      - ./speedtest_data:/config
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - DB_CONNECTION=sqlite
-
 volumes:
   uptime-kuma-data:
   beszel_data:

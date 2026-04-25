@@ -57,8 +57,6 @@ widgets:
       version: 2
       username: "{{HOMEPAGE_VAR_BESZEL_USER}}"
       password: "{{HOMEPAGE_VAR_BESZEL_PASS}}"
-  - speedtest:
-      url: "http://speedtest-tracker:80"
   - search:
       provider: duckduckgo
       target: _blank
