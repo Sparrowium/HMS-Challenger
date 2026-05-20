@@ -15,8 +15,9 @@ A lightweight, container‑aware dashboard that automatically discovers all runn
 
 | Component | Purpose |
 |-----------|---------|
-| [Homepage](https://gethomepage.dev/) | Main dashboard UI, auto‑discovers containers |
-| [Glances](https://nicolargo.github.io/glances/) | Real‑time system & container metrics |
-| [Uptime Kuma](https://github.com/louislam/uptime-kuma) | Service uptime monitoring & status page |
+| **Homepage**| Main dashboard UI, auto‑discovers containers |
+| **Glances** | Real‑time system & container metrics |
+| **Uptime Kuma** | Service uptime monitoring & status page |
+| **Beszel** | Container metrics tracker based on system |
 | Docker Compose | Container orchestration |
 | Docker socket | Enables container discovery |
